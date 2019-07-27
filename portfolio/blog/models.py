@@ -1,3 +1,11 @@
 from django.db import models
 
-# Create your models here.
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    date_published = models.DateTimeField()
+    body = models.TextField()
+    image = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return f'{self.title} Blog'
