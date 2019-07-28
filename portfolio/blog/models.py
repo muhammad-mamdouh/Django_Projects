@@ -9,3 +9,6 @@ class Post(models.Model):
 
     def __str__(self):
         return f'{self.title} Blog'
+
+    def summary(self):
+        return f'{self.body[:250]} ...'
