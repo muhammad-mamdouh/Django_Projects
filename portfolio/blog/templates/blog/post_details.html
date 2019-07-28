@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% block content %}
+  <div class="container">
+    <h1 class="text-center pt-3">Welcome to Mohamed's Blog</h1><br /><br />
+    <h2>{{ post.title }} Details: </h2><hr />
+
+      <div class="card text-center border-info mb-3">
+        <div class="card-header">
+          <h5>{{ post.title }}</h5>
+        </div>
+        <div class="card-body" style="max-width: 1024px;">
+            <div class="row no-gutters">
+              <div class="" >
+                <img src="{{ post.image.url }}" class="card-img pl-5" height="600" width="200">
+              </div>
+              <div class="col-md-24 pl-5">
+                <div class="card-body">
+                  <p class="card-text">{{ post.body }}</p>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          {{ post.date_published|date:"F Y, d" }}
+        </div>
+      </div>
+  </div>
+{% endblock content %}
