@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+{% load staticfiles %}
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,9 +34,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link" href="#">Twitter</a>
-            <a class="nav-item nav-link" href="#">Resume</a>
-            <a class="nav-item nav-link" href="#">Blog</a>
+            <a class="nav-item nav-link" href="https://twitter.com/_mmamdouh">Twitter</a>
+            <a class="nav-item nav-link" href="{% static 'fake-resume.pdf' %}">Resume</a>
+            <a class="nav-item nav-link" href="{% url 'all_posts' %}">Blog</a>
           </div>
         </div>
       </nav>
@@ -49,6 +50,7 @@
           <p>
             <a href="mailto:mahammad.mamdouh@gmail.com" class="btn btn-info my-2">Email Me</a>
           </p>
+          <img class="rounded" src="{% static 'my_pic.png' %}" height="600" width="450"/>
         </div>
       </section>
       <div class="album py-5 bg-light">
