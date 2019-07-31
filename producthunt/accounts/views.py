@@ -4,7 +4,9 @@ from django.contrib import auth, messages
 
 
 def signup(request):
-    if request.method == 'POST':
+    if request.user.is_authenticated:
+        return redirect('home')
+    elif request.method == 'POST':
         username = request.POST['username']
         password = request.POST['user_password']
         confirmed_password = request.POST['user_confirm_password']
@@ -26,7 +28,9 @@ def signup(request):
 
 
 def login(request):
-    if request.method == 'POST':
+    if request.user.is_authenticated:
+        return redirect('home')
+    elif request.method == 'POST':
         user = auth.authenticate(username=request.POST['username'], password=request.POST['user_password'])
         if user:
             auth.login(request, user)
