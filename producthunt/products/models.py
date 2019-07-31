@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Product(models.Model):
     title = models.CharField(max_length=100)
-    date_published = models.DateTimeField()
+    date_published = models.DateTimeField(default=timezone.now)
     total_votes = models.IntegerField(default=1)
     image = models.ImageField(upload_to='images/')
     icon = models.ImageField(upload_to='icons/')
