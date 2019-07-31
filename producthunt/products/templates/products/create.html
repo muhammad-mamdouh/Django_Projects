@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="mt-4">Add a new product!</h1>
+  <div class="container">
+    <form action="{% url 'create' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="form-group col-md-6 mt-4">
+          <label for="product_title">Title</label>
+          <input type="text" class="form-control"
+                 id="product_title" name="product_title" placeholder="Product Title" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="product_body">Body</label>
+          <textarea class="form-control" id="product_body" rows="5"
+                    placeholder="Product Description" name="product_body" required></textarea>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="product_url">URL</label>
+          <textarea class="form-control" id="product_url" rows="2"
+                    placeholder="Product Link" name="product_url" required></textarea>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="product_icon">Icon</label>
+          <input type="file" class="form-control-file" id="product_icon" name="product_icon" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="product_image">Image</label>
+          <input type="file" class="form-control-file" id="product_image" name="product_image" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <button type="submit" class="btn btn-primary">Add Product</button>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock content %}
