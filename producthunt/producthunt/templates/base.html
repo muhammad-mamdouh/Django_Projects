@@ -48,10 +48,17 @@
     </header>
 
     <div class="container">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} mt-3 mb-3">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
       {% block content %}{% endblock content %}
     </div>
 
-    <footer class="text-muted">
+    <footer class="fixed-bottom text-muted">
       <div class="container text-center">
         <p>Have a happy {% now "Y" %}</p>
       </div>
