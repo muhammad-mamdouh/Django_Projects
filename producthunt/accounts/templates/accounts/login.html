@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if error_message %}
+      <div class="alert alert-danger mt-3 mb-3">
+        {{ error_message }}
+      </div>
+  {% endif %}
+  <h1 class="mt-4">Log In!</h1>
+  <div class="container">
+    <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="form-group col-md-6 mt-4">
+          <label for="username">Username</label>
+          {% if username_error %}
+            <input type="text" class="form-control form-control-lg is-invalid"
+                   id="username" name="username" placeholder="Enter your username" required>
+            <div class="invalid-feedback">
+              <span>{{ username_error }}</span>
+            </div>
+          {% else %}
+            <input type="text" class="form-control"
+                   id="username" name="username" placeholder="Enter your username" required>
+          {% endif %}
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="user_password">Password</label>
+          {% if password_error %}
+            <input type="password" class="form-control form-control-lg is-invalid"
+                     id="user_password" name="user_password" placeholder="Enter your password" required>
+            <div class="invalid-feedback">
+              <span>{{ password_error }}</span>
+            </div>
+          {% else %}
+            <input type="password" class="form-control"
+                   id="user_password" name="user_password" placeholder="Enter your password" required>
+          {% endif %}
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <button type="submit" class="btn btn-primary">Log In!</button>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock content %}

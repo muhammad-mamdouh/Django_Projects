@@ -23,3 +23,17 @@ def signup(request):
                           {'confirm_password_error': "Password doesn't match"})
     else:
         return render(request, 'accounts/signup.html')
+
+
+def login(request):
+    if request.method == 'POST':
+        user = auth.authenticate(username=request.POST['username'], password=request.POST['user_password'])
+        if user:
+            auth.login(request, user)
+            messages.success(request, 'Logged Successfully!')
+            return redirect('home')
+        else:
+            return render(request, 'accounts/login.html',
+                          {'error_message': "Check your credentials! Username and password doesn't match"})
+    else:
+        return render(request, 'accounts/login.html')
