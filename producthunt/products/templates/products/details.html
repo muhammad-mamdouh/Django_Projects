@@ -32,7 +32,9 @@
           </div>
         </div>
         <div class="card-footer">
-          <h5>Hunted by {{ product.hunter.username }}  <span class="text-muted">at {{ product.date_published_formatted }}</span></h5>
+          <h5>
+            <img height="25" width="25" src="{% static 'magnifier.png' %}"> Hunted by {{ product.hunter.username }}
+            <span class="text-muted"><img height="25" width="25" src="{% static 'stopwatch.png' %}"> {{ product.date_published_formatted }}</span></h5>
         </div>
       </div>
   </div>
