@@ -14,7 +14,7 @@ def signup(request):
             try:
                 User.objects.get(username=username)
                 return render(request, 'accounts/signup.html',
-                              {'username_error': 'Username has already been taken'})
+                              {'username_error': 'Username has already been taken', 'page_title': 'Sign Up'})
             except User.DoesNotExist:
                 user = User.objects.create_user(username=username, password=password)
                 auth.login(request, user)
@@ -22,9 +22,9 @@ def signup(request):
                 return redirect('home')
         else:
             return render(request, 'accounts/signup.html',
-                          {'confirm_password_error': "Password doesn't match"})
+                          {'confirm_password_error': "Password doesn't match", 'page_title': 'Sign Up'})
     else:
-        return render(request, 'accounts/signup.html')
+        return render(request, 'accounts/signup.html', {'page_title': 'Sign Up'})
 
 
 def login(request):
@@ -37,10 +37,12 @@ def login(request):
             messages.success(request, 'Logged Successfully!')
             return redirect('home')
         else:
-            return render(request, 'accounts/login.html',
-                          {'error_message': "Check your credentials! Username and password doesn't match"})
+            return render(request, 'accounts/login.html', {
+                'error_message': "Check your credentials! Username and password doesn't match",
+                'page_title': 'Sign In'
+            })
     else:
-        return render(request, 'accounts/login.html')
+        return render(request, 'accounts/login.html', {'page_title': 'Sign In'})
 
 
 def logout(request):

@@ -6,7 +6,11 @@ from .models import Product
 
 def home(request):
     products = Product.objects.all().order_by('-total_votes')
-    return render(request, 'products/home.html', {'products': products})
+    context = {
+        'page_title': 'Home',
+        'products': products
+    }
+    return render(request, 'products/home.html', context=context)
 
 
 @login_required()
@@ -25,15 +29,20 @@ def create(request):
             return redirect(f'/products/{str(product.id)}/details/')
         except:
             error_messages = ["Product didn't created! Please try again"]
-            return render(request, 'products/create.html', {'messages': error_messages})
+            return render(request, 'products/create.html',
+                          {'messages': error_messages, 'page_title': 'Create a new product'})
 
     else:
-        return render(request, 'products/create.html')
+        return render(request, 'products/create.html', {'page_title': 'Create a new product'})
 
 
 def details(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'products/details.html', {'product': product})
+    context = {
+        'page_title': 'Product Details',
+        'product': product
+    }
+    return render(request, 'products/details.html', context=context)
 
 
 @login_required()
