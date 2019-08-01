@@ -1,4 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-home page !
+{% load staticfiles %}
+  <div class="row mb-3 mt-5">
+    {% for product in products %}
+    <div class="col-md-6" onclick="window.location='{% url 'details' product.id %}';" style="cursor: pointer;">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0">{{ product.title }}</h3>
+          <div class="mb-1 text-muted">
+            <img class="text-right ml-8" src="{% static 'positive-vote.png' %}" height="20" width="20"> Total Votes {{ product.total_votes }}
+          </div>
+          <p class="card-text mb-auto">{{ product.summary }}</p>
+          <a href="{% url 'details' product.id %}" class="btn btn-secondary mt-2" style="background-color: #ed714e;">
+            Go and vote right now
+          </a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img class="bd-placeholder-img mt-5 mr-4" width="70" height="70" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail" src="{{ product.icon.url }}">
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 {% endblock content %}

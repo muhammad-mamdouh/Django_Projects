@@ -20,4 +20,4 @@ class Product(models.Model):
         return f'{self.date_published.strftime("%b %-d, %Y")}'
 
     def summary(self):
-        return f'{self.body[:250]} ...'
+        return f'{self.body[:150]} ...'

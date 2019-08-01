@@ -5,7 +5,8 @@ from .models import Product
 
 
 def home(request):
-    return render(request, 'products/home.html')
+    products = Product.objects.all().order_by('-total_votes')
+    return render(request, 'products/home.html', {'products': products})
 
 
 @login_required()
