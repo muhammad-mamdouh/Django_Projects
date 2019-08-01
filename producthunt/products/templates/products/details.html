@@ -16,7 +16,7 @@
               <img src="{{ product.image.url }}" class="card-img pl-5" height="400" width="200">
             </div>
             <div class="col-4 text-right p-5 mt-5">
-              <a href="">
+              <a href="javascript:{document.getElementById('upvote_form').submit()}">
                 <button class="btn btn-primary btn-block">
                   <img src="{% static 'positive-vote.png' %}" height="25" width="25"> Upvote {{ product.total_votes }}
                 </button>
@@ -36,4 +36,8 @@
         </div>
       </div>
   </div>
+  <form id="upvote_form" method="POST" action="{% url 'upvote' product.id %}">
+    {% csrf_token %}
+    <input type="hidden">
+  </form>
 {% endblock content %}

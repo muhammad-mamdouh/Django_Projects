@@ -35,5 +35,15 @@ def details(request, product_id):
     return render(request, 'products/details.html', {'product': product})
 
 
+@login_required()
+def upvote(request, product_id):
+    if request.method == 'POST':
+        product = get_object_or_404(Product, pk=product_id)
+        product.total_votes += 1
+        product.save()
+        messages.success(request, 'Product has been voted up!')
+        return redirect(f'/products/{str(product.id)}/details/')
+
+
 def url_refined(url_text):
     return 'https://' + url_text if 'http' not in url_text else url_text
