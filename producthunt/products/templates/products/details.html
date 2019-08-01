@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load staticfiles %}
+  <div class="container mt-3">
+    <h2>{{ product.title }} Details: </h2><hr />
+
+      <div class="card text-center border-info mb-3">
+        <div class="card-header">
+          <h5>
+            <img src="{{ product.icon.url }}" class="img-fluid" height="25" width="25"> {{ product.title }}
+          </h5>
+        </div>
+        <div class="card-body" style="max-width: 1024px;">
+          <div class="row" >
+            <div class="col-6 text-left">
+              <img src="{{ product.image.url }}" class="card-img pl-5" height="400" width="200">
+            </div>
+            <div class="col-4 text-right p-5 mt-5">
+              <a href="">
+                <button class="btn btn-primary btn-block">
+                  <img src="{% static 'positive-vote.png' %}" height="25" width="25"> Upvote {{ product.total_votes }}
+                </button>
+              </a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-24 pl-5">
+              <div class="card-body">
+                <p class="card-text">{{ product.body }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <h5>Hunted by {{ product.hunter.username }}  <span class="text-muted">at {{ product.date_published_formatted }}</span></h5>
+        </div>
+      </div>
+  </div>
+{% endblock content %}
