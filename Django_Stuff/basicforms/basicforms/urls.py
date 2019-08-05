@@ -21,5 +21,6 @@ from basicapp.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='home-index'),
-    path('basicapp/', include('basicapp.urls'))
+    path('basicapp/', include('basicapp.urls')),
+    path('usersapp/', include('usersapp.urls'))
 ]
