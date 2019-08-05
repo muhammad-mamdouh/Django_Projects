@@ -5,9 +5,16 @@ from django.core import validators
 class FormName(forms.Form):
     name = forms.CharField()
     email = forms.EmailField()
+    confirm_email = forms.EmailField(label='Enter your email again')
     text = forms.CharField(widget=forms.Textarea)
     botcatcher = forms.CharField(required=False,
                                  widget=forms.HiddenInput,
                                  validators=[validators.MaxLengthValidator(0)])
 
+    def clean(self):
+        all_cleaned_data = super().clean()
+        email = all_cleaned_data['email']
+        confirm_email = all_cleaned_data['confirm_email']
 
+        if email != confirm_email:
+            raise forms.ValidationError('Make sure emails match!')
