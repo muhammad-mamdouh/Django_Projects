@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'basicapp/templates')
+TEMPLATE_users_DIR = os.path.join(BASE_DIR, 'usersapp/templates')
 
 
 # Quick-start development settings - unsuitable for production
@@ -33,6 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'basicapp.apps.BasicappConfig',
+    'usersapp.apps.UsersappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'basicforms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR,],
+        'DIRS': [TEMPLATE_DIR, TEMPLATE_users_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
