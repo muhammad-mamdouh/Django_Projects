@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from basic_app import views as basic_views
 
 urlpatterns = [
+    path('', basic_views.index, name='index'),
     path('admin/', admin.site.urls),
 ]
 
