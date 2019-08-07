@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from .forms import UserForm, UserProfileInfoForm
+from django.shortcuts import redirect
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 
 def index(request):
@@ -34,3 +38,28 @@ def register(request):
         'profile_form': profile_form
     }
     return render(request, 'basic_app/registration.html', context=context)
+
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect('index')
+            else:
+                return HttpResponse("Account Not Active")
+        else:
+            print('Someone tried to login and failed')
+            print(f'Username: {username}, Password: {password}')
+            return HttpResponse('Invalid login credentials supplied')
+    else:
+        return render(request, 'basic_app/login.html')
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('index')
