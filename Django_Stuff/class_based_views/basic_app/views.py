@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView
+from .models import School
 
 
 class IndexView(TemplateView):
@@ -11,3 +12,8 @@ class IndexView(TemplateView):
             'some_key': 'basic injection'
         }
         return context
+
+
+class SchoolListView(ListView):
+    model = School
+    context_object_name = 'schools'
