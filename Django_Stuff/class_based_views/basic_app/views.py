@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
 from .models import School, Student
 
 
@@ -28,3 +28,8 @@ class SchoolDetailView(DetailView):
 class SchoolCreateView(CreateView):
     model = School
     fields = ('name', 'principal', 'location')
+
+
+class SchoolUpdateView(UpdateView):
+    model = School
+    fields = ('name', 'principal')
