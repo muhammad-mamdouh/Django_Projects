@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
-from .models import School
+from .models import School, Student
 
 
 class IndexView(TemplateView):
@@ -17,3 +17,9 @@ class IndexView(TemplateView):
 class SchoolListView(ListView):
     model = School
     context_object_name = 'schools'
+
+
+class SchoolDetailView(DetailView):
+    model = School
+    template_name = 'basic_app/school_detail.html'
+    context_object_name = 'school_detail'
