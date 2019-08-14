@@ -7,8 +7,10 @@ from django.views.generic import (
     DeleteView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.urls import reverse_lazy
+from django.shortcuts import redirect, get_object_or_404
 from .models import Post
 from .forms import PostForm
 
@@ -54,3 +56,10 @@ class DraftListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Post.objects.filter(date_published__isnull=True).order_by('date_created')
+
+
+@login_required
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect('post_detail', pk=post.pk)
