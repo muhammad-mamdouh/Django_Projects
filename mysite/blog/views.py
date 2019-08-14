@@ -4,9 +4,11 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
+    DeleteView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
+from django.urls import reverse_lazy
 from .models import Post
 from .forms import PostForm
 
@@ -36,3 +38,8 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     redirect_field_name = 'post_detail'
     form_class = PostForm
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    success_url = reverse_lazy('post_list')
