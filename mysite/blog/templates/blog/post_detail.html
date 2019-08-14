@@ -13,7 +13,7 @@
   <p class="postcontent">{{ post.text|safe|linebreaksbr }}</p>
 
   {% if user.is_authenticated %}
-    <a class="btn btn-default" href="">
+    <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}">
       <img class="text-right ml-8" src="{% static 'icons/pencil.png' %}" height="35" width="35">
     </a>
     <a class="btn btn-default" href="">

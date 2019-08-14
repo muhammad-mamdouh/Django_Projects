@@ -3,6 +3,7 @@ from django.views.generic import (
     ListView,
     DetailView,
     CreateView,
+    UpdateView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
@@ -26,6 +27,12 @@ class PostDetailView(DetailView):
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    redirect_field_name = 'post_detail'
+    form_class = PostForm
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     redirect_field_name = 'post_detail'
     form_class = PostForm
