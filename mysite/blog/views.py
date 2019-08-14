@@ -1,10 +1,13 @@
 from django.views.generic import (
     TemplateView,
     ListView,
-    DetailView
+    DetailView,
+    CreateView,
 )
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from .models import Post
+from .forms import PostForm
 
 
 class AboutView(TemplateView):
@@ -20,3 +23,9 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    redirect_field_name = 'post_detail'
+    form_class = PostForm
