@@ -4,6 +4,7 @@ This repository contains many projects done based on django framework.
 ## Projects
 1. [Portfolio](portfolio/)
 2. [Product Hunt Clone](producthunt/)
+2. [My Site](mysite/)
 
 
 ## License
