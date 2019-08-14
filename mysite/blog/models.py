@@ -14,7 +14,7 @@ class Post(models.Model):
         self.date_published = timezone.now()
         self.save()
 
-    def approve_comments(self):
+    def get_approved_comments(self):
         return self.comments.filter(approved_comment=True)
 
     def get_absolute_url(self):

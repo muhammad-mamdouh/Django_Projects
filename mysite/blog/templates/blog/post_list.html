@@ -7,7 +7,7 @@
         <div class="date ml-1">
           <p>Published on: {{ post.date_published|date:"D M Y" }}</p>
         </div>
-        <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
+        <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.get_approved_comments.count }}</a>
       </div>
       <hr>
     {% endfor %}
