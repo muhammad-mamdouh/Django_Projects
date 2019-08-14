@@ -22,7 +22,7 @@
   {% endif %}
 
   <hr>
-  <a class="btn btn-primary btn-comment" href="">Add Comment</a>
+  <a class="btn btn-primary btn-comment" href="{% url 'add_comment_to_post' pk=post.pk %}">Add Comment</a>
 
   <div class="container">
     {% for comment in post.comments.all %}
