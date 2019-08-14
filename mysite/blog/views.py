@@ -38,6 +38,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     redirect_field_name = 'post_detail'
     form_class = PostForm
+    extra_context = {'post_edit': 'valid'}
 
 
 class PostDeleteView(DeleteView):
