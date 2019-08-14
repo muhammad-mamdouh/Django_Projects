@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+  {% for post in posts %}
+    <div class="card mt-3">
+      <div class="card-header">
+        <strong>Created at: {{ post.date_created|date:"d-m-y" }}</strong>
+      </div>
+      <div class="card-body">
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+        <p>{{ post.text|safe|truncatechars:250 }}</p>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock content %}
