@@ -30,7 +30,7 @@
       {% if user.is_authenticated or comment.approved_comment %}
         {{ comment.date_created }}
         {% if not comment.approved_comment %}
-          <a class="btn btn-default" href="">
+          <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}">
             <img class="text-right ml-8" src="{% static 'icons/remove-button.png' %}" height="35" width="35">
           </a>
           <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}">
