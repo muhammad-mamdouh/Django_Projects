@@ -1,7 +1,9 @@
 from django.views.generic import (
     TemplateView,
-    ListView
+    ListView,
+    DetailView
 )
+from django.utils import timezone
 from .models import Post
 
 
@@ -10,4 +12,8 @@ class AboutView(TemplateView):
 
 
 class PostListView(ListView):
+    model = Post
+
+
+class PostDetailView(DetailView):
     model = Post

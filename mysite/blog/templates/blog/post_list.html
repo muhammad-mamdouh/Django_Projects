@@ -3,11 +3,11 @@
   <div class="centerstage mt-1">
     {% for post in post_list %}
       <div class="post mt-3 mb-3">
-        <h1><a href="">{{ post.title }}</a></h1>
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
         <div class="date ml-1">
           <p>Published on: {{ post.date_published|date:"D M Y" }}</p>
         </div>
-        <a href="">Comments: {{ post.approve_comments.count }}</a>
+        <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
       </div>
       <hr>
     {% endfor %}
