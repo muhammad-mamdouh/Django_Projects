@@ -41,6 +41,6 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     extra_context = {'post_edit': 'valid'}
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('post_list')
