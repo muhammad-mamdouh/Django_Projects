@@ -1,0 +1,48 @@
+{% extends 'subreddits/subreddit_base.html' %}
+
+{% block pre_subreddit %}
+    <div class="row">
+      <div class="col-md-4">
+        <div class="content">
+          {% if user.is_authenticated %}
+            <h2>Welcome Back!
+              <span><a href="#">@{{ user.username }}</a></span>
+            </h2>
+          {% endif %}
+          <br />
+          <h2>Subreddits</h2>
+          <p>Welcome to the Groups Page! Select a Group with a shared interest!</p>
+        </div>
+
+        {% if user.is_authenticated %}
+          <a class="btn btn-md btn-fill btn-warning" href="{% url 'subreddits:create' %}">
+            <span class="glyphicon glyphicon-plus-sign">Create New Subreddit!</span>
+          </a>
+        {% endif %}
+      </div>
+  {% endblock pre_subreddit %}
+
+
+  {% block subreddit_content %}
+      <div class="col-md-8">
+        <div class="list-group">
+          {% for subreddit in object_list %}
+            <a class="list-group-item list-group-item-action" href="#">
+              <h3 class="title list-group-item-action">{{ subreddit.name }}</h3>
+              <div class="list-group-item-text container-fluid">
+                {{ subreddit.description_html|safe }}
+                <div class="row">
+                  <div class="col-md-4">
+                    <span class="badge badge-secondary">{{ subreddit.members.count }}</span> member{{ subreddit.members.count|pluralize }}
+                  </div>
+                  <div class="col-md-4">
+                    <span class="badge badge-secondary">{{ subreddit.posts.count }}</span> post{{ subreddit.posts.count|pluralize }}
+                  </div>
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+{% endblock subreddit_content %}
