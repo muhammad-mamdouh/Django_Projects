@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView
+from .models import Subreddit
 
-# Create your views here.
+
+class CreateSubreddit(LoginRequiredMixin, CreateView):
+    model = Subreddit
+    fields = ['name', 'description']
