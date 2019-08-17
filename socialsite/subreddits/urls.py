@@ -6,4 +6,6 @@ app_name = 'subreddits'
 urlpatterns = [
     path('', views.ListSubreddits.as_view(), name='all'),
     path('new/', views.CreateSubreddit.as_view(), name='create'),
+    path('join/<slug:slug>/', views.JoinSubreddit.as_view(), name='join'),
+    path('leave/<slug:slug>/', views.LeaveSubreddit.as_view(), name='leave'),
 ]
