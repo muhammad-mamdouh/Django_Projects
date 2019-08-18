@@ -44,7 +44,7 @@ class PostDetail(SelectRelatedMixin, DetailView):
     select_related = ('user', 'subreddit')
 
     def get_queryset(self):
-        queryset = super().queryset()
+        queryset = super().get_queryset()
         return queryset.filter(user__username__iexact=self.kwargs.get('username'))
 
 
