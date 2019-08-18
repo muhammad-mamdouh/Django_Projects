@@ -16,18 +16,18 @@
 </head>
 <body>
   <!--NAVBAR-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light mynav" role="navigation" id="navbar">
+ <nav class="navbar navbar-expand-lg navbar-light bg-light mynav" role="navigation" id="navbar">
     <ul class="navbar-nav ml-5">
       <li class="nav-item navbar-brand bigbrand"><a class="nav-link" href="{% url 'home' %}">Star Social</a></li>
     </ul>
     <ul class="navbar-nav ml-auto mr-5">
       {% if user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link" href="#">Post</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Groups</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Create Groups</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'posts:create' %}">Post</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'subreddits:all' %}">Subreddits</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'subreddits:create' %}">Create Subreddits</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Log Out</a></li>
       {% else %}
-        <li class="nav-item"><a class="nav-link" href="#">Groups</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'subreddits:all' %}">Subreddits</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Log In</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}">Sign Up</a></li>
       {% endif %}

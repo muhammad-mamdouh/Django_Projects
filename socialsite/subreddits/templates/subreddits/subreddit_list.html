@@ -6,7 +6,7 @@
         <div class="content">
           {% if user.is_authenticated %}
             <h2>Welcome Back!
-              <span><a href="#">@{{ user.username }}</a></span>
+              <span><a class="mr-auto" href="{% url 'posts:for_user' username=user.username %}">@{{ user.username }}</a></span>
             </h2>
           {% endif %}
           <br />
@@ -27,7 +27,7 @@
       <div class="col-md-8">
         <div class="list-group">
           {% for subreddit in object_list %}
-            <a class="list-group-item list-group-item-action" href="#">
+            <a class="list-group-item list-group-item-action" href="{% url 'subreddits:single' slug=subreddit.slug %}">
               <h3 class="title list-group-item-action">{{ subreddit.name }}</h3>
               <div class="list-group-item-text container-fluid">
                 {{ subreddit.description_html|safe }}

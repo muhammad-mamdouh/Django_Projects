@@ -15,7 +15,9 @@
         {% for post in object_list %}
           {% if post.user == user %}
             <li class="">
-              <a href="#">{{ post.message_html|safe }}</a>
+              <a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">
+                {{ post.message_html|safe }}
+              </a>
             </li>
           {% endif %}
         {% endfor %}
@@ -35,7 +37,7 @@
         <!--{% endfor %}-->
         {% for post in object_list %}
             <li class="mb-2">
-              <a href="#">{{ post.message_html|safe }}</a>
+              <a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.message_html|safe }}</a>
             </li>
         {% endfor %}
       </ul>
