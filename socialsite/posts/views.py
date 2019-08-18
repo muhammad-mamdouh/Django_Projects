@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.views.generic import ListView
+from braces.views import SelectRelatedMixin
+from .models import Post
 
-# Create your views here.
+
+class PostList(SelectRelatedMixin, ListView):
+    model = Post
+    select_related = ('user', 'subreddit')

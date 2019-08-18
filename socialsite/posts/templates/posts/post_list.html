@@ -1,0 +1,53 @@
+{% extends 'posts/post_base.html' %}
+
+
+{% block pre_post %}
+  <!--{% for member_subreddit in get_user_subreddits %}-->
+    <!--<li class="subreddit li-with-bullet">-->
+      <!--<a href="{% url 'subreddits:single' slug=member_subreddit.subreddit.slug %}"></a>-->
+    <!--</li>-->
+  <!--{% endfor %}-->
+  {% if user.is_authenticated %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Your Posts:</h5>
+        <ul class="">
+        {% for post in object_list %}
+          {% if post.user == user %}
+            <li class="">
+              <a href="#">{{ post.message_html|safe }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">All of the Posts:</h5>
+      <ul class="">
+        <!--{% for other_subreddit in get_other_subreddits %}-->
+          <!--<li class="subreddit li-with-bullet">-->
+            <!--<a href="{% url 'subreddits:single' slug=other_subreddit.slug %}">{{ other_subreddit.name }}</a>-->
+          <!--</li>-->
+        <!--{% endfor %}-->
+        {% for post in object_list %}
+            <li class="mb-2">
+              <a href="#">{{ post.message_html|safe }}</a>
+            </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock pre_post %}
+
+
+{% block post_content %}
+  <div class="">
+    {% for post in post_list %}
+      {% include 'posts/_post.html' %}
+    {% endfor %}
+  </div>
+{% endblock post_content %}
