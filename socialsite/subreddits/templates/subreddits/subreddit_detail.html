@@ -1,0 +1,27 @@
+{% extends 'subreddits/subreddit_base.html' %}
+
+{% block pre_subreddit %}
+  <h1>{{ subreddit.name }}</h1><hr />
+  <h2>Members Count: {{ subreddit.members.count }}</h2><br />
+  <div class="content">
+    {% if user in subreddit.members.all %}
+      <a class="btn btn-lg btn-warning" href="{% url 'subreddits:leave' slug=subreddit.slug %}">
+        <span class="glyphicon glyphicon-remove-circle"></span>Leave
+      </a>
+    {% else %}
+      <a class="btn btn-lg btn-warning" href="{% url 'subreddits:join' slug=subreddit.slug %}">
+        <span class="glyphicon glyphicon-ok-circle"></span>Join
+      </a>
+    {% endif %}
+  </div><br />
+{% endblock pre_subreddit %}
+
+{% block subreddit_content %}
+    {% if subreddit.posts.count == 0 %}
+      <h2>No posts in this subreddit yet!</h2>
+    {% else %}
+      {% for post in subreddit.posts.all %}
+        {% include "posts/_post.html" %}
+      {% endfor %}
+    {% endif %}
+{% endblock subreddit_content %}

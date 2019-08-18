@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, ListView, RedirectView
+from django.views.generic import CreateView, ListView, RedirectView, DetailView
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
@@ -13,6 +13,10 @@ class CreateSubreddit(LoginRequiredMixin, CreateView):
 
 
 class ListSubreddits(ListView):
+    model = Subreddit
+
+
+class SingleSubreddit(DetailView):
     model = Subreddit
 
 
