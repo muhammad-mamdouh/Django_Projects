@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import SelectRelatedMixin
 from django.contrib import messages
@@ -35,3 +35,12 @@ class DeletePost(LoginRequiredMixin, SelectRelatedMixin, DeleteView):
     def delete(self, *args, **kwargs):
         messages.success(self.request, 'Post has been deleted successfully!')
         return super().delete(*args, **kwargs)
+
+
+class PostDetail(SelectRelatedMixin, DetailView):
+    model = Post
+    select_related = ('user', 'subreddit')
+
+    def get_queryset(self):
+        queryset = super().queryset()
+        return queryset.filter(user__username__iexact=self.kwargs.get('username'))
