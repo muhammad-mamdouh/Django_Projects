@@ -6,7 +6,7 @@ from .serializers import SongsSerializer
 
 
 class BaseViewClass(APITestCase):
-    client_class = APIClient()
+    client = APIClient()
 
     @staticmethod
     def create_song(title='', artist=''):
