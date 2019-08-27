@@ -10,3 +10,7 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return f'User: {self.user.username} posted about {self.title}'
+
+    @property
+    def owner(self):
+        return self.user
