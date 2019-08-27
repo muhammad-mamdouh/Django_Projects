@@ -9,4 +9,4 @@ class BlogPost(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'User: {self.user} posted about {self.title}'
+        return f'User: {self.user.username} posted about {self.title}'
