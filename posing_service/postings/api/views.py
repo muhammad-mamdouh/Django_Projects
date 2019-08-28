@@ -24,6 +24,9 @@ class BlogPostAPIView(mixins.CreateModelMixin , generics.ListAPIView):
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
+    def get_serializer_context(self, *args, **kwargs):
+        return {'request': self.request}
+
 
 class BlogPostRUDView(generics.RetrieveUpdateDestroyAPIView):
     # What field inside of our model are we looking up for?
@@ -40,3 +43,6 @@ class BlogPostRUDView(generics.RetrieveUpdateDestroyAPIView):
     #     return BlogPost.objects.get(pk=pk).filter(......)
 
     serializer_class = BlogPostSerializer
+
+    def get_serializer_context(self, *args, **kwargs):
+        return {'request': self.request}

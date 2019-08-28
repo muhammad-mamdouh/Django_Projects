@@ -20,7 +20,8 @@ class BlogPostSerializer(serializers.ModelSerializer):
         read_only_fields = ['user']
 
     def get_uri(self, object):
-        return object.get_api_url()
+        request = self.context.get('request')
+        return object.get_api_url(request=request)
 
     def validate_title(self, value):
         qs = BlogPost.objects.filter(title__iexact=value)
