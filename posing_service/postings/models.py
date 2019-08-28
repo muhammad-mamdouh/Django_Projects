@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from rest_framework.reverse import reverse as api_reverse
 
 
 class BlogPost(models.Model):
@@ -14,3 +15,6 @@ class BlogPost(models.Model):
     @property
     def owner(self):
         return self.user
+
+    def get_api_url(self):
+        return api_reverse('api-postings:post-rud', kwargs={'version': 'v1', 'pk': self.pk})

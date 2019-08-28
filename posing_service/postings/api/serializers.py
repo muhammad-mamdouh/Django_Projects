@@ -5,17 +5,22 @@ from postings.models import BlogPost
 # Converts to JSON and
 # Validations for data passed
 class BlogPostSerializer(serializers.ModelSerializer):
+    uri = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = BlogPost
-        fields = '__all__'
+        # fields = '__all__'
+        fields = [
+            'uri',
+            'pk',
+            'user',
+            'title',
+            'content',
+            'timestamp',
+        ]
         read_only_fields = ['user']
-        # fields = [
-        #     'pk',
-        #     'user',
-        #     'title',
-        #     'content',
-        #     'timestamp',
-        # ]
+
+    def get_uri(self, object):
+        return object.get_api_url()
 
     def validate_title(self, value):
         qs = BlogPost.objects.filter(title__iexact=value)
