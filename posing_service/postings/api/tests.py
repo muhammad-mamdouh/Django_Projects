@@ -74,3 +74,13 @@ class BlogPostAPITestCase(APITestCase):
         response  = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         print(response.data)
+
+    def test_post_item_with_user(self):
+        data      = {'title': 'Test POST title', 'content': 'Test POST content'}
+        url       = api_reverse('api-postings:post-create-list', kwargs={'version': 'v1'})
+        user_obj  = User.objects.first()
+        payload   = payload_handler(user_obj)
+        token_rsp = encode_handler(payload)
+        self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token_rsp)
+        response  = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
