@@ -1,10 +1,13 @@
 from rest_framework.test import APITestCase
 from rest_framework.reverse import reverse as api_reverse
 from rest_framework import status
+from rest_framework_jwt.settings import api_settings
 from django.contrib.auth import get_user_model
 from postings.models import BlogPost
 
-User = get_user_model()
+User            = get_user_model()
+payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+encode_handler  = api_settings.JWT_ENCODE_HANDLER
 
 
 class BlogPostAPITestCase(APITestCase):
@@ -57,3 +60,17 @@ class BlogPostAPITestCase(APITestCase):
         url      = api_reverse('api-postings:post-create-list', kwargs={'version': 'v1'})
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_update_item_with_user(self):
+        blog_post = BlogPost.objects.first()
+        print(blog_post.content)
+        url       = blog_post.get_api_url()
+        data      = {'title': 'Test POST title', 'content': 'Test POST content'}
+        user_obj  = User.objects.first()
+        payload   = payload_handler(user_obj)
+        token_rsp = encode_handler(payload)
+        self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token_rsp)
+
+        response  = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        print(response.data)
