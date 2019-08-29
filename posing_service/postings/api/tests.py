@@ -84,3 +84,23 @@ class BlogPostAPITestCase(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token_rsp)
         response  = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_user_ownership(self):
+        owner     = User.objects.create(username='test_user2')
+        blog_post = BlogPost.objects.create(
+            user=owner,
+            title='New test title',
+            content='some_random_content'
+        )
+
+        user_obj  = User.objects.first()
+        self.assertNotEqual(user_obj.username, owner.username)
+
+        payload   = payload_handler(user_obj)
+        token_rsp = encode_handler(payload)
+        self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token_rsp)
+
+        url       = blog_post.get_api_url()
+        data      = {'title': 'Some rando title', 'content': 'some more content'}
+        response  = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
