@@ -3,5 +3,9 @@
 <div>
   <h1>This is the body</h1>
   <p>This is just a paragraph</p>
+
+  {% for account in accounts  %}
+    <p>{{ account }}</p>
+  {% endfor %}
 </div>
 {% endblock content %}
