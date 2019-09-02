@@ -18,6 +18,17 @@
     }
   </style>
   <div class="main">
+    <div class="container">
+      <!--Flash Messages-->
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      <!--End Flash Messages-->
+    </div>
     {% block content %}{% endblock %}
   </div>
   <!--End Body-->
