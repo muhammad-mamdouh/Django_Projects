@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
+from django.db.models import Q
 # from django.contrib.auth.decorators import login_required
 from .forms import CreateBlogPostForm, UpdateBlogPostForm
 from .models import BlogPost
@@ -55,3 +56,17 @@ def edit_blog_view(request, slug):
             }
         )
     return render(request, 'blog/edit_blog.html', {'form': form})
+
+
+def get_blog_queryset(query=None):
+    queryset = []
+    queries  = query.split(" ")     # 'install python 3.7' >> ['install', 'python', '3.7']
+    for q in queries:
+        posts = BlogPost.objects.filter(
+            Q(title__icontains=q) |
+            Q(body__icontains=q)
+        ).distinct()
+
+        for post in posts:
+            queryset.append(post)
+    return list(set(queryset))
