@@ -21,6 +21,7 @@ def registration_view(request):
         context['registration_form'] = form
     return render(request, 'account/register.html', context)
 
+
 def login_view(request):
     context = {}
 
@@ -43,9 +44,11 @@ def login_view(request):
     context['login_form'] = form
     return render(request, 'account/login.html', context)
 
+
 def logout_view(request):
     logout(request)
     return redirect('personal:home-page')
+
 
 def account_view(request):
     context = {}
@@ -71,3 +74,8 @@ def account_view(request):
         )
     context['account_form'] = form
     return render(request, 'account/account.html', context)
+
+
+def must_authenticate_view(request):
+
+    return render(request, 'account/must_authenticate.html')
