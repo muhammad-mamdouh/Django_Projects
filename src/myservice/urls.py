@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('personal.urls', namespace='personal')),
     path('', include('account.urls', namespace='account')),
+    path('blog/', include('blog.urls', namespace='blog')),
 
     # Password Reset Links
     path(
