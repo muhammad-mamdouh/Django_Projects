@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from .forms import RegistrationForm, AccountAuthenticationForm
+from .forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
 
 
 def registration_view(request):
@@ -46,3 +46,23 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('personal:home-page')
+
+def account_view(request):
+    context = {}
+
+    if not request.user.is_authenticated:
+        return redirect('account:login')
+
+    if request.POST:
+        form = AccountUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+    else:   # GET request
+        form = AccountUpdateForm(
+            initial={
+                'email': request.user.email,
+                'username': request.user.username,
+            }
+        )
+    context['account_form'] = form
+    return render(request, 'account/account.html', context)

@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <title>Title</title>
   {% if user.is_authenticated %}
-    <p>Hello, {{ user.username }} | <a href="{% url 'account:logout' %}">Logout</a></p>
+    <p>Hello, {{ user.username }} | <a href="{% url 'account:logout' %}">Logout</a> |
+    <a href="{% url 'account:account' %}">Account</a></p>
   {% else %}
     <p><a href="{% url 'account:register' %}">Register</a> | <a href="{% url 'account:login' %}">Login</a></p>
   {% endif %}
