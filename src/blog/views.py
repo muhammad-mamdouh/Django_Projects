@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
 # from django.contrib.auth.decorators import login_required
 from .forms import CreateBlogPostForm
 from .models import BlogPost
@@ -23,3 +24,8 @@ def create_blog_view(request):
 
     context['form'] = form
     return render(request, 'blog/create_blog.html', context)
+
+
+def detail_blog_view(request, slug):
+    blog_post = get_object_or_404(BlogPost, slug=slug)
+    return render(request, 'blog/detail_blog.html', {'blog_post': blog_post})
