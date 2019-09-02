@@ -3,17 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  {% if user.is_authenticated %}
-    <p>Hello, {{ user.username }} | <a href="{% url 'account:logout' %}">Logout</a> |
-    <a href="{% url 'account:account' %}">Account</a></p>
-  {% else %}
-    <p><a href="{% url 'account:register' %}">Register</a> | <a href="{% url 'account:login' %}">Login</a></p>
-  {% endif %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  {% include 'snippets/header.html' %}
 </head>
 <body>
-  {% block content %}{% endblock %}
+  <!--Body-->
+  <style type="text/css">
+    .main{
+      min-height: 85vh;
+      height: 100%;
+    }
+  </style>
+  <div class="main">
+    {% block content %}{% endblock %}
+  </div>
+  <!--End Body-->
+  {% include 'snippets/footer.html' %}
 </body>
-<footer>
-  <h3>This is the footer</h3>
-</footer>
 </html>
