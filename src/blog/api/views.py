@@ -1,12 +1,13 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from blog.models import BlogPost
-from account.models import Account
 from .serializers import BlogPostSerializer
 
 
 @api_view(['GET', ])
+@permission_classes((IsAuthenticated, ))
 def api_detail_blog_view(request, slug):
     try:
         blog_post = BlogPost.objects.get(slug=slug)
@@ -19,11 +20,16 @@ def api_detail_blog_view(request, slug):
 
 
 @api_view(['PUT', ])
+@permission_classes((IsAuthenticated, ))
 def api_update_blog_view(request, slug):
     try:
         blog_post = BlogPost.objects.get(slug=slug)
     except BlogPost.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+    user = request.user
+    if blog_post.author != user:
+        return Response({'response': "You don't have permission to edit that post."})
 
     if request.method == 'PUT':
         serializer = BlogPostSerializer(blog_post, data=request.data)
@@ -36,28 +42,16 @@ def api_update_blog_view(request, slug):
 
 
 @api_view(['DELETE', ])
+@permission_classes((IsAuthenticated, ))
 def api_delete_blog_view(request, slug):
     try:
         blog_post = BlogPost.objects.get(slug=slug)
     except BlogPost.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'DELETE':
-        operation = blog_post.delete()
-        data       = {}
-        if operation:
-            data['success'] = 'Deleted successfully'
-        else:
-            data['failure'] = 'Delete Failed'
-        return Response(data=data)
-
-
-@api_view(['DELETE', ])
-def api_delete_blog_view(request, slug):
-    try:
-        blog_post = BlogPost.objects.get(slug=slug)
-    except BlogPost.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    user = request.user
+    if blog_post.author != user:
+        return Response({'response': "You don't have permission to delete that post."})
 
     if request.method == 'DELETE':
         operation = blog_post.delete()
@@ -70,8 +64,9 @@ def api_delete_blog_view(request, slug):
 
 
 @api_view(['POST', ])
+@permission_classes((IsAuthenticated, ))
 def api_create_blog_view(request):
-    account   = Account.objects.get(pk=1)   # Hardcoded temporarily
+    account   = request.user
     blog_post = BlogPost(author=account)
     if request.method == 'POST':
         serializer = BlogPostSerializer(blog_post, data=request.data)
