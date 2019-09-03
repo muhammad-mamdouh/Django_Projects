@@ -28,6 +28,7 @@ urlpatterns = [
 
     # REST Framework URLS
     path('api/blog/', include('blog.api.urls', namespace='blog_api')),
+    path('api/account/', include('account.api.urls', namespace='account_api')),
 
     # Password Reset Links
     path(
