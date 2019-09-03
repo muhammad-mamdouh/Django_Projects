@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'account',
     'blog',
     'rest_framework',
+    'rest_framework.authtoken',
 
     # Django Apps
     'django.contrib.admin',
@@ -48,6 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
