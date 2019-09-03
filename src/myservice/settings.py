@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'personal',
     'account',
     'blog',
+    'rest_framework',
 
     # Django Apps
     'django.contrib.admin',

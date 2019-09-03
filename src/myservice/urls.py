@@ -26,6 +26,9 @@ urlpatterns = [
     path('', include('account.urls', namespace='account')),
     path('blog/', include('blog.urls', namespace='blog')),
 
+    # REST Framework URLS
+    path('api/blog/', include('blog.api.urls', namespace='blog_api')),
+
     # Password Reset Links
     path(
         'password_change/',
