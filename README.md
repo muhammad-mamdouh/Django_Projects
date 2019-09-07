@@ -4,7 +4,7 @@ This repository contains many projects done based on django framework.
 ## Projects
 1. [Portfolio](portfolio/)
 2. [Product Hunt Clone](producthunt/)
-3. [Medium.com Clone](mysite/)
+3. [Medium.com Clone](https://github.com/muhammad-mamdouh/wall-app)
 4. [Social Site Clone](socialsite/)
 5. [Blogging Service API](src/)
 
