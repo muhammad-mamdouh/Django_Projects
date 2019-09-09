@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign In</title>
+</head>
+<body>
+    <a href="{% url 'social:begin' 'github' %}">
+      <button>Github</button>
+    </a>
+
+    <a href="{% url 'social:begin' 'google-oauth2' %}">
+      <button>Google</button>
+    </a>
+</body>
+</html>
