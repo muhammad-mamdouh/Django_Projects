@@ -35,6 +35,13 @@ INSTALLED_APPS = [
     # My Apps
     'social_django',
 
+    # For Facebook login
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
+
     # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -115,16 +124,35 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    # Need to login by username and password in a django form
     'django.contrib.auth.backends.ModelBackend',
+
+    # For Facebook login
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+SITE_ID = 1
 
 # Configure the authentication backend
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY    = os.environ.get('GOOGLE_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_SECRET')
-SOCIAL_AUTH_GITHUB_KEY           = os.environ.get('GITHUB_KEY')
-SOCIAL_AUTH_GITHUB_SECRET        = os.environ.get('GITHUB_SECRET')
-SOCIAL_AUTH_URL_NAMESPACE        = 'social'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY      = os.environ.get('GOOGLE_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET   = os.environ.get('GOOGLE_SECRET')
+SOCIAL_AUTH_GITHUB_KEY             = os.environ.get('GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET          = os.environ.get('GITHUB_SECRET')
+
+# Facebook
+SOCIAL_AUTH_FACEBOOK_KEY           = os.environ.get('FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET        = os.environ.get('FACEBOOK_SECRET')
+SOCIAL_AUTH_FACEBOOK_SCOPE         = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+            'fields': 'id,name,email',
+            }
+
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
+SOCIAL_AUTH_URL_NAMESPACE          = 'social'
+SOCIAL_AUTH_STRATEGY               = 'social_django.strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE                = 'social_django.models.DjangoStorage'
 
 
 LOGIN_URL           = '/auth/login/google-oauth2/'

@@ -1,3 +1,5 @@
+{% load socialaccount %}
+{% providers_media_js %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +13,18 @@
 
     <a href="{% url 'social:begin' 'google-oauth2' %}">
       <button>Google</button>
+    </a>
+
+    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">
+      <button>Login with Facebook</button>
+    </a>
+
+    <a href="{% provider_login_url 'facebook' method='js_sdk' %}">
+      <button>Facebook js_sdk</button>
+    </a>
+
+    <a href="{% provider_login_url 'facebook' method='js_sdk' %}">
+      <button>Facebook OAuth 2.0</button>
     </a>
 </body>
 </html>
