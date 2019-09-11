@@ -129,3 +129,12 @@ CELERY_BROKER_URL      = 'redis://127.0.0.1:6379'
 CELERY_BROKER_PASSWORD = '9RYw4dXtcEntuwY/sXpPJvmaIH2AOwh+s1yOkX1MqiYsDqHrOI4VqN5m4bfRlOCZD8+Hfg9wH5+62yH8'
 CELERY_ACCEPT_CONTENT  = ['json']   # It's basically the format that the tasks are stored in
 CELERY_TASK_SERIALIZER = 'json'
+
+
+# Mailing Configs
+EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST          = 'smtp.gmail.com'
+EMAIL_PORT          = 587
+EMAIL_USE_TLS       = True
+EMAIL_HOST_USER     = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
