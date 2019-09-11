@@ -8,6 +8,7 @@ This repository contains many projects done based on django framework.
 4. [Social Site Clone](socialsite/)
 5. [Blogging Service API](src/)
 6. [OAuth 2.0](google_oauth2_src/)
+7. [Task Scheduler With Celery](task_scheduler/)
 
 ## License
 These projects are under the MIT license (MIT)
