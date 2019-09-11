@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'p+l(zqh(+ek)9-532j)rja=!5w70^6=$^t_#rnp(u_z^pw+%tk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -122,3 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Celery Configs
+CELERY_BROKER_URL      = 'redis://127.0.0.1:6379'
+CELERY_BROKER_PASSWORD = '9RYw4dXtcEntuwY/sXpPJvmaIH2AOwh+s1yOkX1MqiYsDqHrOI4VqN5m4bfRlOCZD8+Hfg9wH5+62yH8'
+CELERY_ACCEPT_CONTENT  = ['json']   # It's basically the format that the tasks are stored in
+CELERY_TASK_SERIALIZER = 'json'
