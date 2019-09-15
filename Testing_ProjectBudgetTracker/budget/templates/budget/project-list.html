@@ -13,7 +13,7 @@
       <div class="col s12 md6 xl3">
         <div class="card-panel">
           <h5>{{ project.name }}</h5>
-          <a href="#" class="btn">Visit</a>
+          <a href="{% url 'budget:detail' project_slug=project.slug %}" class="btn">Visit</a>
         </div>
       </div>
       {% empty %}

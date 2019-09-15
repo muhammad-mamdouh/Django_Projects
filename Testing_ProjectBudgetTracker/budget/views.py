@@ -1,5 +1,9 @@
 from django.views.generic import ListView, CreateView
-from .models import Project, Category
+from django.shortcuts import get_object_or_404, render, redirect
+from django.http import HttpResponse
+import json
+from .models import Project, Category, Expense
+from .forms import ExpenseForm
 
 
 class ProjectsListView(ListView):
@@ -22,3 +26,33 @@ class ProjectsCreateView(CreateView):
                 project=Project.objects.get(id=self.object.id)
             )
         return super().form_valid(form)
+
+
+def project_detail_view(request, project_slug):
+    project = get_object_or_404(Project, slug=project_slug)
+
+    if request.method == 'GET':
+        category_list = Category.objects.filter(project=project)
+        return render(request, 'budget/project-detail.html', {
+                       'project': project,
+                       'expense_list': project.expenses.all(),
+                       'category_list': category_list
+                })
+
+    elif request.method == 'POST':
+        form = ExpenseForm(request.POST)
+
+        if form.is_valid():
+            title         = form.cleaned_data['title']
+            amount        = form.cleaned_data['amount']
+            category_name = form.cleaned_data['category']
+            category      = get_object_or_404(Category, name=category_name, project=project)
+            Expense.objects.create(project=project, title=title, amount=amount, category=category)
+
+    elif request.method == 'DELETE':
+        id      = json.loads(request.body)['id']
+        expense = Expense.objects.get(id=id)
+        expense.delete()
+        return HttpResponse(status=204)
+
+    return redirect(project)
