@@ -50,9 +50,12 @@ def project_detail_view(request, project_slug):
             Expense.objects.create(project=project, title=title, amount=amount, category=category)
 
     elif request.method == 'DELETE':
-        id      = json.loads(request.body)['id']
-        expense = Expense.objects.get(id=id)
-        expense.delete()
+        try:
+            id      = json.loads(request.body)['id']
+            expense = Expense.objects.get(id=id)
+            expense.delete()
+        except:
+            return HttpResponse(status=404)
         return HttpResponse(status=204)
 
     return redirect(project)
