@@ -24,7 +24,7 @@ class Project(models.Model):
     @property
     def total_transactions(self):
         project_expense_list = Expense.objects.filter(project=self)
-        return len(project_expense_list)
+        return project_expense_list.count()
 
     def get_absolute_url(self):
         return reverse('budget:detail', kwargs={'project_slug': self.slug})
