@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     # Third Party Apps
     'django_otp',
     'django_otp.plugins.otp_totp',
+
+    # My Applications
+    'accounts',
 ]
 
 MIDDLEWARE = [
