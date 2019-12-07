@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # Third Party Apps
     'django_otp',
     'django_otp.plugins.otp_totp',
+    'rest_framework',
+    'rest_framework.authtoken',
 
     # My Applications
     'accounts',
@@ -109,6 +111,18 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2,
+}
 
 
 # Internationalization
