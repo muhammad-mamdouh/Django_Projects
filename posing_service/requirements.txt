@@ -1,5 +1,5 @@
 Django==2.2.3
 djangorestframework==3.10.2
 djangorestframework-jwt==1.11.0
-PyJWT==1.7.1
+PyJWT==2.4.0
 text-unidecode==1.2
